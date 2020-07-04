@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'Prueba Angular';
   mensajeAlerta = '';
   hayAlerta = false;
+  hayExito = false;
   restcountries = [];
   formdata;
   generos = ['Prefiero no especificar','Masculino', 'Femenino'];
@@ -50,12 +51,20 @@ export class AppComponent {
         }
       }
     }
-    this.mostrarAlerta(errores);
+    if(errores.length === 0){
+
+    }else{
+      this.mostrarAlerta(errores);
+    }
   }
 
   mostrarAlerta(msg){
     this.hayAlerta = true;
     this.mensajeAlerta = msg;
     setTimeout(()=>{this.hayAlerta = false; this.mensajeAlerta = ''},10000)
+  }
+  mostrarExito(){
+    this.hayExito = true;
+    setTimeout(()=>{this.hayExito = false; },10000)
   }
 }

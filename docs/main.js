@@ -78,7 +78,7 @@ module.exports = "input.ng-invalid.ng-touched {\n  border: 1px solid red;\n}\n\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<h1>{{title}}</h1>\n<div class=\"container\">\n  <div *ngIf=\"hayAlerta\" class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n    <div [innerHTML]=\"mensajeAlerta\"></div>\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n    <form [formGroup] = \"formdata\" (ngSubmit) = \"onClickSubmit(formdata)\">\n        <div class=\"form-group\">\n          <label for=\"nombre\">Nombre</label>\n          <input type=\"text\" class=\"form-control\" id=\"nombre\" formControlName=\"nombre\">\n        </div>\n        <div class=\"form-group\">\n          <label for=\"apellido\">Apellido</label>\n          <input type=\"text\" class=\"form-control\" id=\"apellido\" formControlName=\"apellido\">\n        </div>\n        <div class=\"form-group\">\n          <label for=\"email\">Email</label>\n          <input type=\"text\" class=\"form-control\" id=\"email\" email formControlName=\"email\">\n        </div>\n        <div class=\"form-group\" >\n          <label for=\"pais\">Pais</label>\n          <select class=\"form-control\" id=\"pais\" ng-controller=\"paises\" option formControlName=\"pais\">\n              <option *ngFor=\"let index of restcountries\">{{index.name}}</option>\n          </select>\n        </div>\n        <div class=\"form-group\" >\n          <div *ngFor=\"let gen of generos\" class=\"form-check\" >\n            <input class=\"form-check-input\" type=\"radio\" value=\"{{gen}}\" formControlName=\"genero\">\n            <label class=\"form-check-label\" for=\"defaultCheck1\">\n              {{gen}}\n            </label>\n          </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"telefono\">Teléfono</label>\n            <input type=\"text\" class=\"form-control\" id=\"telefono\" formControlName=\"telefono\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Validar</button>\n      </form>\n</div>\n<router-outlet></router-outlet>\n"
+module.exports = "\n<h1>{{title}}</h1>\n<div class=\"container\">\n  <div *ngIf=\"hayAlerta\" class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n    <div [innerHTML]=\"mensajeAlerta\"></div>\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div *ngIf=\"hayExito\" class=\"alert alert-primary alert-dismissible fade show\" role=\"alert\">\n    <div>¡Todo está en orden!</div>\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n    <form [formGroup] = \"formdata\" (ngSubmit) = \"onClickSubmit(formdata)\">\n        <div class=\"form-group\">\n          <label for=\"nombre\">Nombre</label>\n          <input type=\"text\" class=\"form-control\" id=\"nombre\" formControlName=\"nombre\">\n        </div>\n        <div class=\"form-group\">\n          <label for=\"apellido\">Apellido</label>\n          <input type=\"text\" class=\"form-control\" id=\"apellido\" formControlName=\"apellido\">\n        </div>\n        <div class=\"form-group\">\n          <label for=\"email\">Email</label>\n          <input type=\"text\" class=\"form-control\" id=\"email\" email formControlName=\"email\">\n        </div>\n        <div class=\"form-group\" >\n          <label for=\"pais\">Pais</label>\n          <select class=\"form-control\" id=\"pais\" ng-controller=\"paises\" option formControlName=\"pais\">\n              <option *ngFor=\"let index of restcountries\">{{index.name}}</option>\n          </select>\n        </div>\n        <div class=\"form-group\" >\n          <div *ngFor=\"let gen of generos\" class=\"form-check\" >\n            <input class=\"form-check-input\" type=\"radio\" value=\"{{gen}}\" formControlName=\"genero\">\n            <label class=\"form-check-label\" for=\"defaultCheck1\">\n              {{gen}}\n            </label>\n          </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"telefono\">Teléfono</label>\n            <input type=\"text\" class=\"form-control\" id=\"telefono\" formControlName=\"telefono\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Validar</button>\n      </form>\n</div>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -111,6 +111,7 @@ var AppComponent = /** @class */ (function () {
         this.title = 'Prueba Angular';
         this.mensajeAlerta = '';
         this.hayAlerta = false;
+        this.hayExito = false;
         this.restcountries = [];
         this.generos = ['Prefiero no especificar', 'Masculino', 'Femenino'];
         fetch("https://restcountries.eu/rest/v2/all")
@@ -146,13 +147,22 @@ var AppComponent = /** @class */ (function () {
                 }
             }
         }
-        this.mostrarAlerta(errores);
+        if (errores.length === 0) {
+        }
+        else {
+            this.mostrarAlerta(errores);
+        }
     };
     AppComponent.prototype.mostrarAlerta = function (msg) {
         var _this = this;
         this.hayAlerta = true;
         this.mensajeAlerta = msg;
         setTimeout(function () { _this.hayAlerta = false; _this.mensajeAlerta = ''; }, 10000);
+    };
+    AppComponent.prototype.mostrarExito = function () {
+        var _this = this;
+        this.hayExito = true;
+        setTimeout(function () { _this.hayExito = false; }, 10000);
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

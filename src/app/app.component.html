@@ -7,6 +7,12 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <div *ngIf="hayExito" class="alert alert-primary alert-dismissible fade show" role="alert">
+    <div>¡Todo está en orden!</div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
     <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata)">
         <div class="form-group">
           <label for="nombre">Nombre</label>
