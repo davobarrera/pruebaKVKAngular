@@ -1,0 +1,44 @@
+
+<h1>{{title}}</h1>
+<div class="container">
+  <div *ngIf="hayAlerta" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div [innerHTML]="mensajeAlerta"></div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata)">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" formControlName="nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" class="form-control" id="apellido" formControlName="apellido">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" email formControlName="email">
+        </div>
+        <div class="form-group" >
+          <label for="pais">Pais</label>
+          <select class="form-control" id="pais" ng-controller="paises" option formControlName="pais">
+              <option *ngFor="let index of restcountries">{{index.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" >
+          <div *ngFor="let gen of generos" class="form-check" >
+            <input class="form-check-input" type="radio" value="{{gen}}" formControlName="genero">
+            <label class="form-check-label" for="defaultCheck1">
+              {{gen}}
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" formControlName="telefono">
+        </div>
+        <button type="submit" class="btn btn-primary">Validar</button>
+      </form>
+</div>
+<router-outlet></router-outlet>
