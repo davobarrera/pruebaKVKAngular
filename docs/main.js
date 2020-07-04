@@ -148,6 +148,7 @@ var AppComponent = /** @class */ (function () {
             }
         }
         if (errores.length === 0) {
+            this.mostrarExito();
         }
         else {
             this.mostrarAlerta(errores);

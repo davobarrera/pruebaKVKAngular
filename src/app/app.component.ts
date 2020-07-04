@@ -52,7 +52,7 @@ export class AppComponent {
       }
     }
     if(errores.length === 0){
-
+      this.mostrarExito();
     }else{
       this.mostrarAlerta(errores);
     }
